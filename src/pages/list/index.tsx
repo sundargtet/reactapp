@@ -1,35 +1,40 @@
-import { useEffect, useState } from "react"
-import axios from 'axios'
-import Card from "./card"
-import { IQuoteListProps, IQouteProps } from './interface'
-import Pagiation from '../pagination'
+import { useState, useRef, useEffect, useCallback } from "react";
+import Card from './card'
 import './style.scss'
+import { useInfiniteScroll } from '../../hooks/useInfiniteScroll'
+import { IQouteProps } from './interface'
 
-function Index() {
-  const [quotesList, setQuoteList] = useState<IQuoteListProps | {}>({})
-  useEffect(() => {
-    const fetchQuotes = async () => {
-      const res = await axios.get('https://api.quotable.io/quotes')
-      setQuoteList(res.data)
-    }
-    fetchQuotes()
-  }, [])
-  const { results, totalPages, page } = { ...quotesList }
-  const handlePagination = async (id: number) => {
-    const res = await axios.get(`https://api.quotable.io/quotes?page=${id}`)
-    setQuoteList(res.data)
-  }
-  return (
-    <>
-      <main className='cards-list'>
-        {
-          results?.length &&
-          results?.map((quote: IQouteProps) => <Card key={quote._id} quote={quote} />)
+function App() {
+    const [page, setPage] = useState(1);
+    const { loading, error, list } = useInfiniteScroll(page);
+    const loader = useRef(null);
+
+    const handleObserver = useCallback((entries:any[]) => {
+        const target = entries[0];
+        if (target.isIntersecting) {
+            setPage((prev) => prev + 1);
         }
-      </main>
-      <Pagiation totalPages={totalPages} page={page} handlePagination={handlePagination} />
-    </>
-  )
+    }, []);
+
+    useEffect(() => {
+        const option = {
+            root: null,
+            rootMargin: "20px",
+            threshold: 0
+        };
+        const observer = new IntersectionObserver(handleObserver, option);
+        if (loader!.current) observer.observe(loader!.current);
+    }, [handleObserver]);
+    return (
+        <>
+            <main className="cards-list">
+                {list.map((item: IQouteProps) => <Card key={item._id} quote={item} />)}
+            </main>
+            {loading && <p>Loading...</p>}
+            {error && <p>Error!</p>}
+            <div ref={loader} />
+        </>
+    );
 }
 
-export default Index
+export default App;

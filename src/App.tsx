@@ -1,12 +1,14 @@
-import Poster from "./pages/poster"
-import QuotesList from './pages/list'
+import { Routes, Route } from 'react-router-dom'
+
+import Home from './pages/home'
+import QuoteDetails from './pages/quote-details'
 
 function App() {
   return (
-    <>
-      <Poster />
-      <QuotesList/>
-    </>
+    <Routes>
+      <Route path='/' element={<Home />} />
+      <Route path='/details/:quoteId' element={<QuoteDetails />} />
+    </Routes>
   )
 }
 

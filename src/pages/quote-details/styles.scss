@@ -1,0 +1,53 @@
+$primary-color: #cecece;
+
+.wrapper {
+  display: flex;
+
+  .content {
+    width: 60%;
+    font-size: 40px;
+    border: 1px solid $primary-color;
+    padding: 8px;
+  }
+
+  .details {
+    width: 40%;
+    font-size: 26px;
+    border: 1px solid $primary-color;
+    padding: 8px;
+
+    .title {
+      display: inline-block;
+      width: 40%;
+    }
+  }
+
+  .tag-button {
+    border: none;
+    outline: none;
+    background-color: $primary-color;
+    padding: 4px 6px;
+    margin: 0px 4px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+}
+
+@media screen and (max-width: "768px") {
+  .wrapper {
+    flex-direction: column;
+    .content {
+      width: 100%;
+    }
+
+    .details {
+      width: 100%;
+
+      .title {
+        display: inline-block;
+        width: 40%;
+      }
+    }
+  }
+}
