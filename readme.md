@@ -1,0 +1,1 @@
+in this project we used styled components and sass for stylings
