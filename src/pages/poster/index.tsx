@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react"
 import axios from 'axios'
 import Container from './qoute'
+import { IQuoteStateProps } from './interface'
 
 function Poster() {
-    const [qoute, setQoute]: any = useState({})
+    const [qoute, setQoute] = useState<IQuoteStateProps | {}>({})
     useEffect(() => {
         const fetchQuote = async () => {
             const res = await axios.get('https://api.quotable.io/random')
@@ -17,9 +18,10 @@ function Poster() {
         }
 
     }, [])
+    const { content, author } = { ...qoute }
     return (
         <div>
-            <Container message={qoute.content} author={qoute.author} />
+            <Container message={content} author={author} />
         </div>
     )
 }

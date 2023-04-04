@@ -1,7 +1,9 @@
 export interface IProps {
-
+    totalPages: number | undefined;
+    page: number | undefined;
+    handlePagination: (item: number) => void;
 }
 
-export interface Props {
-    active : any;
+export interface IStyleProps {
+    active: any;
 }

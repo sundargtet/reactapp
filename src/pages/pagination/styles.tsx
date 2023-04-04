@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Props } from './interface'
+import { IStyleProps } from './interface'
 
 export const PaginationWrapper = styled.div`
     overflow-x: scroll;
@@ -10,9 +10,9 @@ export const PaginationContainer = styled.div`
     display: flex;
     flex-wrap:nowrap ;
 `
-export const PaginationButton = styled.button<Props>`
+export const PaginationButton = styled.button<IStyleProps>`
     padding: 10px;
-    background-color:${({active}: any) => active ? '#cecece' : '#ffffff'} ;
+    background-color:${({ active }) => active ? '#cecece' : '#ffffff'} ;
     border:none ;
     outline:none ;
     cursor: pointer;
