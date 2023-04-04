@@ -1,0 +1,49 @@
+$shadow: #cecece;
+$font-color: #060036;
+$tablet-breakpoint: "768px";
+$mobile-breakpoint: "480px";
+
+@mixin wrapper($padding) {
+  padding: $padding;
+}
+
+.cards-list {
+  @include wrapper(8px);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  .card {
+    @include wrapper(8px);
+    min-width: 200px;
+    max-width: 270px;
+    border: 1px solid $shadow;
+    border-radius: 4px;
+    box-shadow: 2px 2px 2px 2px $shadow;
+    color: $font-color;
+    cursor: pointer;
+    background-color: #ffffff;
+
+    @media screen and (max-width: $tablet-breakpoint) {
+      max-width: 240px;
+    }
+  }
+  .card:hover {
+    animation: anime 2s linear infinite;
+  }
+}
+
+@keyframes anime {
+  0% {
+    // opacity: 0;
+    transform: scale(1);
+  }
+  50% {
+    // opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    // opacity: 0;
+    transform: scale(1);
+  }
+}
