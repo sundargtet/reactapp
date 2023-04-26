@@ -8,7 +8,7 @@ function Container({ message, author }: IQouteProps) {
                 {message}
             </Message>
             <Author>
-                - {author}
+                 - {author}
             </Author>
             
         </Wrapper>
